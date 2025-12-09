@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # DAWn – AI Native Digital Audio Workstation
 
 **DAWn** is a prototype Digital Audio Workstation (DAW) designed and developed as
