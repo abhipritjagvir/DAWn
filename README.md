@@ -62,4 +62,3 @@ DAWn AI Native Digital Audio Workstation/
 =======
 # DAWn
 DAWn – AI Native Digital Audio Workstation (MSc project)
->>>>>>> 3c862c1fb9900ad34141bf537b0667d29d154692
