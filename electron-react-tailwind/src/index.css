@@ -1,0 +1,322 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+
+  /* Core brand accents */
+  --accent-1: #7c3aed; /* violet */
+  --accent-2: #22d3ee; /* cyan */
+  --accent-3: #fb7185; /* rose */
+
+  /* Surfaces / shells */
+  --surface-xx: #0b0f16;  /* app background */
+  --surface-dark: #0f131b;/* deepest panels */
+  --surface: #141824;     /* main panels */
+  --surface-mid: #191f2a; /* secondary panels */
+  --surface-light: #202637;/* headers / strips */
+
+  --border-subtle: rgba(255,255,255,0.04);
+  --border-strong: rgba(255,255,255,0.12);
+
+  --text-hi: #f9fafb;
+  --text-mid: #cbd5f5;
+  --text-dim: #6b7280;
+
+  --shadow-soft: 0 18px 40px -24px rgba(0,0,0,0.9);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply text-textHi;
+  background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+  color: var(--text-hi);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+/* ============================================================
+   Focus rings 
+   ============================================================ */
+*:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.6);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Scrollbars — sleek neon rails
+   ============================================================ */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(124, 58, 237, 0.45),
+    rgba(34, 211, 238, 0.45)
+  );
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+}
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ============================================================
+   Starfield + nebula motion (for background FX components)
+   ============================================================ */
+@keyframes twinkle {
+  0% {
+    opacity: 0.35;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 0.35;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-8%, -8%, 0);
+  }
+}
+
+/* ============================================================
+   Motion Pack 
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dawn-float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes dawn-fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(6px) scale(0.995);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes dawn-sheen {
+    0% {
+      transform: translateX(-150%) skewX(-12deg);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.35;
+    }
+    100% {
+      transform: translateX(150%) skewX(-12deg);
+      opacity: 0;
+    }
+  }
+}
+
+/* ============================================================
+   Utilities 
+   ============================================================ */
+@layer utilities {
+  /* Hover lift for cards / panels */
+  .dawn-hover-lift {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+  .dawn-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(148, 163, 255, 0.4);
+    background: radial-gradient(
+        circle at top left,
+        rgba(124, 58, 237, 0.18),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at bottom right,
+        rgba(34, 211, 238, 0.16),
+        transparent 55%
+      );
+  }
+
+  /* Slow float for glowing elements / floating chips */
+  .dawn-float-slow {
+    animation: dawn-float 6s ease-in-out infinite;
+  }
+
+  /* Appear-in animation for modals / HUDs */
+  .dawn-appear {
+    animation: dawn-fade-in-up 0.36s ease forwards;
+  }
+
+  /* Glass sheen overlay */
+  .dawn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .dawn-sheen::after {
+    content: "";
+    position: absolute;
+    inset: -20% -60% auto;
+    height: 140%;
+    width: 40%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.28),
+      transparent
+    );
+    filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .dawn-sheen:hover::after {
+    animation: dawn-sheen 800ms ease;
+  }
+
+  /* Smooth meter/playhead transitions */
+  .dawn-smooth {
+    transition:
+      height 0.12s linear,
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  /* Pulsing glow for active transport (Play/Rec) */
+  .dawn-pulse-glow {
+    box-shadow: 0 0 22px rgba(103, 232, 249, 0.18);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dawn-hover-lift,
+  .dawn-float-slow,
+  .dawn-appear {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Pro-level Panel Presets
+   ============================================================ */
+
+/* Main shell: channel rack, mixer, playlist tracks, sidebars */
+.dawn-panel {
+  background: linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.96),
+      rgba(2, 6, 23, 0.98)
+    );
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Header bar: transport, section titles, tabs */
+.dawn-panel-header {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.9),
+    rgba(30, 64, 175, 0.5)
+  );
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--text-mid);
+}
+
+/* Sub-panels: inspector */
+.dawn-panel-subtle {
+  background: linear-gradient(
+    145deg,
+    rgba(15, 23, 42, 0.9),
+    rgba(15, 23, 42, 0.98)
+  );
+  border: 1px solid var(--border-subtle);
+}
+
+/* Tag / chip (AI, MIDI, Audio) */
+.dawn-chip {
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at top left,
+    rgba(124, 58, 237, 0.45),
+    rgba(15, 23, 42, 0.9)
+  );
+  border: 1px solid rgba(129, 140, 248, 0.65);
+  padding: 2px 9px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Transport buttons */
+.dawn-transport-btn {
+  background: radial-gradient(
+    circle at 20% 0%,
+    rgba(34, 211, 238, 0.18),
+    rgba(15, 23, 42, 1)
+  );
+  border: 1px solid rgba(148, 163, 255, 0.55);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.dawn-transport-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+/* Neon borders for AI sections */
+.dawn-ai-border {
+  border: 1px solid rgba(94, 234, 212, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(45, 212, 191, 0.18),
+    0 22px 60px -28px rgba(8, 47, 73, 1);
+}
+
+/* Meter bar / level */
+.dawn-meter {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.9),
+    rgba(15, 23, 42, 1)
+  );
+}
+.dawn-meter-fill {
+  background: linear-gradient(
+    180deg,
+    #22c55e,
+    #eab308,
+    #ef4444
+  );
+  transition: height 0.08s linear;
+}

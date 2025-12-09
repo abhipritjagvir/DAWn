@@ -1,0 +1,65 @@
+# ===========================================================
+# DAWn – AI Native Digital Audio Workstation
+# Git ignore for Node.js + React + Electron + JUCE
+# ===========================================================
+
+# Node modules
+node_modules/
+
+# Frontend builds (Vite / React)
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Vite cache
+.vite/
+
+# Electron build output
+out/
+release/
+
+# OS / file system junk
+.DS_Store
+Thumbs.db
+
+# IDE / editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# TypeScript
+*.tsbuildinfo
+
+# JUCE / native build artefacts (CMake / Visual Studio)
+**/build/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake-build-*/
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.exe
+*.dll
+*.lib
+
+# Crash dumps
+*.dmp
+
+# Temporary files
+*.tmp
+*.temp
